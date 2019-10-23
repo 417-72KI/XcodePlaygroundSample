@@ -8,7 +8,7 @@ func measure <T> (_ f: () -> T) -> (result: T, duration: Double) {
     return (result, timeElapsed)
 }
 
-public extension Double {
+extension Double {
     var milliSecString: String {
         .init(format: "%.3f ms", self * 1000)
     }
