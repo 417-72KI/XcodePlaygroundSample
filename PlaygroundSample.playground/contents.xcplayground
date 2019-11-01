@@ -4,5 +4,6 @@
         <page name='`first as?` vs `lazy.compactMap.first`'/>
         <page name='`contains` vs `~=`'/>
         <page name='`reduce` vs `joined`'/>
+        <page name='heredoc indents'/>
     </pages>
 </playground>
