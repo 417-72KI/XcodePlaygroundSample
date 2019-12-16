@@ -5,5 +5,9 @@
         <page name='`contains` vs `~=`'/>
         <page name='`reduce` vs `joined`'/>
         <page name='heredoc indents'/>
+        <page name='NSNumber and UInt'/>
+        <page name='`flatMap` vs guard let'/>
+        <page name='`flatMap`s'/>
+        <page name='WebKit'/>
     </pages>
 </playground>
