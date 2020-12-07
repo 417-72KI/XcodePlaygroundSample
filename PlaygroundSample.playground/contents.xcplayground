@@ -8,6 +8,6 @@
         <page name='NSNumber and UInt'/>
         <page name='`flatMap` vs guard let'/>
         <page name='`flatMap`s'/>
-        <page name='WebKit'/>
+        <page name='group'/>
     </pages>
 </playground>
