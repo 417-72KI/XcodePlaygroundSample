@@ -9,5 +9,6 @@
         <page name='`flatMap` vs guard let'/>
         <page name='`flatMap`s'/>
         <page name='group'/>
+        <page name='KeyPath'/>
     </pages>
 </playground>
