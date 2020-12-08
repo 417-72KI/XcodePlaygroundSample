@@ -35,9 +35,12 @@ hogeFuga[keyPath: fugaKeyPath]
 let fooBar = FooBar(from: hogeFuga)
 
 let fooBarHogeFoo = (\FooBar.hoge).appending(path: \Hoge.foo)
+\FooBar.hoge.foo == fooBarHogeFoo
 
 print(fooBar.hoge.foo)
 fooBar[keyPath: fooBarHogeFoo] = "foo-bar-hoge-foo"
+print(fooBar.hoge.foo)
+fooBar[keyPath: \.hoge.foo] = "foo"
 print(fooBar.hoge.foo)
 
 let fooBarFugaFoo = (\FooBar.fuga).appending(path: \Fuga.foo)
@@ -63,18 +66,25 @@ extension Department {
 struct Person {
     var id: Int
     var name: String
+    var age: Int
+}
+
+extension Person {
+    var canDrink: Bool { age >= 20 }
 }
 
 let departments: [Department] = [
     .init(name: "General Affairs Department",
           member: [
-            .init(id: 3, name: "Bob"),
-            .init(id: 1, name: "Emma")
+            .init(id: 3, name: "Bob", age: 28),
+            .init(id: 1, name: "Emma", age: 40),
+            .init(id: 5, name: "Chris", age: 19)
     ]),
     .init(name: "Development Department",
           member: [
-            .init(id: 4, name: "Amelia"),
-            .init(id: 2, name: "George")
+            .init(id: 4, name: "Amelia", age: 18),
+            .init(id: 2, name: "George", age: 22),
+            .init(id: 6, name: "Chris", age: 19)
     ])
 ]
 
@@ -83,12 +93,14 @@ departments.flatMap { $0.member }
     .map { $0.name }
 departments.map { $0.boss }
     .map { $0.name }
+departments.map { $0.boss.name }
 
 // After
 departments.flatMap(\.member)
     .map(\.name)
 departments.map(\.boss)
     .map(\.name)
+departments.map(\.boss.name)
 
 let bossKeyPath = \Department.boss
 let nameKeyPath = \Person.name
@@ -102,23 +114,27 @@ let bossNameKeyPath = bossKeyPath.appending(path: nameKeyPath)
 let trials = 1000
 measure(trials: trials) {
     departments.flatMap { $0.member }
+        .filter { $0.canDrink }
         .map { $0.name }
 }.milliSecString
 
 measure(trials: trials) {
     departments.flatMap(\.member)
+        .filter(\.canDrink)
         .map(\.name)
 }.milliSecString
 
 measure(trials: trials) {
     departments.lazy
         .flatMap { $0.member }
+        .filter { $0.canDrink }
         .map { $0.name }
 }.milliSecString
 
 measure(trials: trials) {
     departments.lazy
         .flatMap(\.member)
+        .filter(\.canDrink)
         .map(\.name)
 }.milliSecString
 
