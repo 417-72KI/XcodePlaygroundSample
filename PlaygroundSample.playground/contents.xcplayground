@@ -10,5 +10,6 @@
         <page name='`flatMap`s'/>
         <page name='group'/>
         <page name='KeyPath'/>
+        <page name='MainActor'/>
     </pages>
 </playground>
